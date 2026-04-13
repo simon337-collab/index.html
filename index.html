@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fit at 55 — 12-Week Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Syne:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#1a1a18;
+  --ink2:#4a4a46;
+  --ink3:#8a8a84;
+  --paper:#f7f5f0;
+  --paper2:#eeeae2;
+  --paper3:#e5e0d6;
+  --line:#d8d3c8;
+  --s:#2d6a4f;
+  --s-bg:#e8f5ee;
+  --c:#1a5c7a;
+  --c-bg:#e4f2f8;
+  --f:#6b3fa0;
+  --f-bg:#f0eaf8;
+  --r:#7a6a5a;
+  --r-bg:#f0ece6;
+  --a:#a05c1a;
+  --a-bg:#f8f0e4;
+}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Syne',sans-serif;
+  font-size:14px;
+  line-height:1.6;
+  min-height:100vh;
+}
+
+.page{max-width:980px;margin:0 auto;padding:3rem 2rem 6rem}
+
+/* ── HEADER ── */
+.hd{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:2rem;
+  align-items:end;
+  padding-bottom:2rem;
+  border-bottom:2px solid var(--ink);
+  margin-bottom:2.5rem;
+}
+.hd-eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:.5rem}
+.hd-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;font-weight:700}
+.hd-title em{font-weight:400;font-style:italic;color:var(--s)}
+.hd-sub{font-size:13px;color:var(--ink2);margin-top:.6rem;max-width:380px;line-height:1.7}
+.hd-stats{display:flex;gap:2rem;text-align:right}
+.stat-n{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;line-height:1;color:var(--ink)}
+.stat-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-top:2px}
+
+/* ── PHASE NAV ── */
+.phase-nav{display:flex;gap:0;margin-bottom:2rem;border:1.5px solid var(--ink);border-radius:8px;overflow:hidden}
+.phase-btn{
+  flex:1;padding:12px 16px;border:none;background:transparent;
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+  color:var(--ink3);border-right:1.5px solid var(--ink);
+  transition:background .15s,color .15s;line-height:1.4;
+}
+.phase-btn:last-child{border-right:none}
+.phase-btn:hover{background:var(--paper2);color:var(--ink)}
+.phase-btn.active{background:var(--ink);color:var(--paper)}
+.phase-sub{display:block;font-size:10px;font-weight:400;letter-spacing:.04em;text-transform:none;opacity:.7;margin-top:2px}
+
+/* ── PHASE META ── */
+.phase-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;font-size:12px;color:var(--ink2)}
+.pm-item{display:flex;align-items:center;gap:6px}
+.pm-dot{width:6px;height:6px;border-radius:50%;background:var(--s);flex-shrink:0}
+
+/* ── DAY GRID ── */
+.day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:2.5rem}
+
+.day-card{
+  border:1.5px solid var(--line);border-radius:8px;
+  padding:12px 10px;background:#fff;
+  display:flex;flex-direction:column;gap:8px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.day-card.rest{background:var(--paper);border-color:var(--paper3)}
+.day-card:hover{border-color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+
+.day-name{font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink3);font-weight:600}
+.day-badge{
+  display:inline-block;font-size:9px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:2px 7px;border-radius:3px;width:fit-content;
+}
+.db-strength{background:var(--s-bg);color:var(--s)}
+.db-cardio  {background:var(--c-bg);color:var(--c)}
+.db-flex    {background:var(--f-bg);color:var(--f)}
+.db-rest    {background:var(--r-bg);color:var(--r)}
+.db-active  {background:var(--a-bg);color:var(--a)}
+
+.day-divider{height:1px;background:var(--line)}
+
+.ex-list{list-style:none;display:flex;flex-direction:column;gap:4px}
+.ex-list li{
+  font-size:11px;color:var(--ink2);line-height:1.4;
+  display:flex;align-items:flex-start;gap:5px;
+  cursor:pointer;padding:2px 3px;border-radius:4px;
+  transition:background .12s,color .12s;
+}
+.ex-list li:hover{background:var(--paper2);color:var(--ink)}
+.ex-pip{width:4px;height:4px;border-radius:50%;margin-top:5px;flex-shrink:0}
+
+/* ── SPLIT BARS ── */
+.split-wrap{margin-bottom:2.5rem}
+.section-label{font-size:10px;text-transform:uppercase;letter-spacing:.16em;font-weight:600;color:var(--ink3);margin-bottom:1rem}
+.split-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.split-lbl{font-size:12px;color:var(--ink2);width:90px;flex-shrink:0}
+.split-track{flex:1;height:5px;background:var(--paper3);border-radius:3px;overflow:hidden}
+.split-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.split-pct{font-size:11px;color:var(--ink3);width:28px;text-align:right;flex-shrink:0}
+
+/* ── NUTRITION ── */
+.nutr-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  border:1.5px solid var(--ink);border-radius:8px;overflow:hidden;
+  margin-bottom:2.5rem;
+}
+.nutr-cell{padding:18px 20px;background:#fff}
+.nutr-cell:not(:last-child){border-right:1px solid var(--line)}
+.nutr-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.16em;font-weight:600;color:var(--s);margin-bottom:6px}
+.nutr-val{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--ink);line-height:1;margin-bottom:4px}
+.nutr-note{font-size:11px;color:var(--ink3);line-height:1.5}
+
+/* ── TIPS ── */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;margin-bottom:2.5rem}
+.tip-card{border:1.5px solid var(--line);border-radius:8px;padding:16px;background:#fff;transition:border-color .15s,box-shadow .15s}
+.tip-card:hover{border-color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.tip-icon{font-size:16px;margin-bottom:8px}
+.tip-title{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.tip-text{font-size:11px;color:var(--ink2);line-height:1.6}
+
+/* ── FOOTER ── */
+.footer{padding-top:2rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-note{font-size:11px;color:var(--ink3);max-width:420px;line-height:1.6}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;color:var(--ink3)}
+
+/* ── MODAL ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(26,26,24,.6);z-index:999;
+  align-items:center;justify-content:center;padding:1.5rem;
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:#fff;border:2px solid var(--ink);border-radius:10px;
+  max-width:540px;width:100%;max-height:86vh;overflow-y:auto;
+  box-shadow:6px 6px 0 var(--ink);
+  animation:mIn .18s ease;
+}
+@keyframes mIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.modal-hd{
+  padding:20px 22px 16px;border-bottom:1.5px solid var(--line);
+  display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
+  position:sticky;top:0;background:#fff;border-radius:10px 10px 0 0;z-index:1;
+}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink);line-height:1.2}
+.modal-badge{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;margin-top:5px}
+.modal-close{
+  width:30px;height:30px;border:1.5px solid var(--line);border-radius:50%;
+  background:transparent;cursor:pointer;font-size:14px;color:var(--ink2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:border-color .15s,background .15s;
+}
+.modal-close:hover{border-color:var(--ink);background:var(--paper2)}
+
+.modal-body{padding:18px 22px 26px;display:flex;flex-direction:column;gap:18px}
+.m-sec-title{font-size:9px;text-transform:uppercase;letter-spacing:.16em;font-weight:600;color:var(--ink3);margin-bottom:8px}
+
+.muscles-row{display:flex;flex-wrap:wrap;gap:5px}
+.muscle-pill{font-size:11px;padding:3px 9px;border-radius:3px;background:var(--paper2);color:var(--ink2)}
+.muscle-pill.primary{background:var(--s-bg);color:var(--s);font-weight:600}
+
+.steps-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.step-item{display:flex;gap:10px;align-items:flex-start}
+.step-num{
+  width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ink);
+  font-size:10px;font-weight:600;color:var(--ink);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.step-text{font-size:12px;color:var(--ink2);line-height:1.6;padding-top:2px}
+
+.cues-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cue-card{border:1.5px solid var(--line);border-radius:6px;padding:12px}
+.cue-card.do{border-color:rgba(45,106,79,.3);background:var(--s-bg)}
+.cue-card.dont{border-color:rgba(160,92,26,.3);background:var(--a-bg)}
+.cue-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.12em;font-weight:600;margin-bottom:6px}
+.cue-card.do .cue-lbl{color:var(--s)}
+.cue-card.dont .cue-lbl{color:var(--a)}
+.cue-ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.cue-ul li{font-size:11px;color:var(--ink2);line-height:1.5;padding-left:10px;position:relative}
+.cue-ul li::before{content:'–';position:absolute;left:0;color:var(--ink3)}
+
+@media(max-width:680px){
+  .hd{grid-template-columns:1fr}
+  .hd-stats{text-align:left}
+  .day-grid{grid-template-columns:repeat(2,1fr)}
+  .nutr-strip{grid-template-columns:1fr}
+  .nutr-cell:not(:last-child){border-right:none;border-bottom:1px solid var(--line)}
+  .cues-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hd">
+    <div>
+      <div class="hd-eyebrow">Personalized Fitness Program</div>
+      <h1 class="hd-title">12-Week Plan<br>for Men <em>55+</em></h1>
+      <p class="hd-sub">Weight loss · Muscle gain · Cardiovascular fitness · Flexibility. Built to protect joints and prioritize recovery.</p>
+    </div>
+    <div class="hd-stats">
+      <div><div class="stat-n">12</div><div class="stat-l">Weeks</div></div>
+      <div><div class="stat-n">3</div><div class="stat-l">Phases</div></div>
+      <div><div class="stat-n">5×</div><div class="stat-l">Per week</div></div>
+    </div>
+  </div>
+
+  <div class="phase-nav" id="phaseNav">
+    <button class="phase-btn active" data-phase="1">Phase 1 — Foundation<span class="phase-sub">Weeks 1–4</span></button>
+    <button class="phase-btn" data-phase="2">Phase 2 — Build<span class="phase-sub">Weeks 5–8</span></button>
+    <button class="phase-btn" data-phase="3">Phase 3 — Peak<span class="phase-sub">Weeks 9–12</span></button>
+  </div>
+
+  <div class="phase-meta" id="phaseMeta"></div>
+  <div class="day-grid" id="dayGrid"></div>
+
+  <div class="split-wrap">
+    <div class="section-label">Weekly time split</div>
+    <div id="splitRows"></div>
+  </div>
+
+  <div style="margin-bottom:2.5rem">
+    <div class="section-label">Nutrition targets</div>
+    <div class="nutr-strip">
+      <div class="nutr-cell"><div class="nutr-lbl">Protein</div><div class="nutr-val">150g+</div><div class="nutr-note">Daily minimum · 0.7–1g per lb bodyweight · prioritize post-workout</div></div>
+      <div class="nutr-cell"><div class="nutr-lbl">Caloric deficit</div><div class="nutr-val">300–500</div><div class="nutr-note">Calories below TDEE · modest deficit preserves muscle while burning fat</div></div>
+      <div class="nutr-cell"><div class="nutr-lbl">Hydration</div><div class="nutr-val">3–4L</div><div class="nutr-note">Water per day · more on training days · electrolytes if sweating heavily</div></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:2.5rem">
+    <div class="section-label">Key guidelines for 55+</div>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon">🦴</div><div class="tip-title">Joint-friendly form</div><div class="tip-text">Prioritize controlled reps over heavy weight. Never sacrifice form to add load. Machines and cables are great alternatives to free weights early on.</div></div>
+      <div class="tip-card"><div class="tip-icon">😴</div><div class="tip-title">Recovery is training</div><div class="tip-text">At 55, muscle repair takes 48–72 hrs. Never train the same muscle group on back-to-back days. Sleep 7–9 hrs — growth hormone peaks during deep sleep.</div></div>
+      <div class="tip-card"><div class="tip-icon">❤️</div><div class="tip-title">Zone 2 cardio</div><div class="tip-text">Zone 2 (60–70% max HR) is the fat-burning sweet spot. Target HR: ~99–116 bpm. Talk test: you can speak in sentences but not sing.</div></div>
+      <div class="tip-card"><div class="tip-icon">🧘</div><div class="tip-title">Flexibility daily</div><div class="tip-text">Even 10 min of daily stretching reduces injury risk dramatically. Focus on hips, hamstrings, thoracic spine, and shoulders.</div></div>
+      <div class="tip-card"><div class="tip-icon">📈</div><div class="tip-title">Progressive overload</div><div class="tip-text">Increase load by 5–10% only when you can complete all sets with clean form. Log weights and reps weekly.</div></div>
+      <div class="tip-card"><div class="tip-icon">💊</div><div class="tip-title">Supplement basics</div><div class="tip-text">Consider creatine (5g/day), vitamin D3, magnesium glycinate, and omega-3s. Discuss with your doctor first.</div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p class="footer-note">For general fitness purposes only. Consult a physician before beginning any new exercise program, especially if you have pre-existing conditions, joint issues, or cardiovascular concerns.</p>
+    <div class="footer-brand">Fit at 55</div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-hd">
+      <div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-badge" id="modalBadge"></div>
+      </div>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <div><div class="m-sec-title">Muscles worked</div><div class="muscles-row" id="modalMuscles"></div></div>
+      <div><div class="m-sec-title">How to do it</div><ol class="steps-list" id="modalSteps"></ol></div>
+      <div>
+        <div class="m-sec-title">Form cues</div>
+        <div class="cues-grid">
+          <div class="cue-card do"><div class="cue-lbl">Do</div><ul class="cue-ul" id="modalDos"></ul></div>
+          <div class="cue-card dont"><div class="cue-lbl">Avoid</div><ul class="cue-ul" id="modalDonts"></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────────────
+var PHASES = {
+  1:{
+    meta:["3 strength sessions / week","2 cardio sessions","1 flexibility day","Focus: build habit + movement patterns"],
+    days:[
+      {name:"Monday",   type:"strength",label:"Strength",   exs:["Goblet squat 3×10","Dumbbell chest press 3×10","Seated cable row 3×10","Dumbbell curl 2×12","Plank 3×20s"]},
+      {name:"Tuesday",  type:"cardio",  label:"Cardio",     exs:["10 min warm-up walk","25 min Zone 2 walk or bike","5 min cool-down","Talk-test pace throughout"]},
+      {name:"Wednesday",type:"flex",    label:"Flexibility",exs:["Hip flexor stretch 3×30s","Hamstring stretch 3×30s","Chest opener 3×30s","Cat-cow 2×10","Foam roll 10 min"]},
+      {name:"Thursday", type:"strength",label:"Strength",   exs:["Romanian deadlift 3×10","Incline DB press 3×10","Lat pulldown 3×10","Tricep pushdown 2×12","Dead bug 3×8"]},
+      {name:"Friday",   type:"cardio",  label:"Cardio",     exs:["5 min warm-up","30 min swim or cycling","5 min cool-down","Aim for light sweat"]},
+      {name:"Saturday", type:"active",  label:"Active rec.",exs:["30–45 min nature walk","Light yard work or golf","Pickleball or leisurely bike","Stay moving, low intensity"]},
+      {name:"Sunday",   type:"rest",    label:"Rest",       exs:["Full rest day","Gentle stretching optional","Hydrate well","Meal prep for the week"]}
+    ],
+    split:[{l:"Strength",p:35,c:"#2d6a4f"},{l:"Cardio",p:30,c:"#1a5c7a"},{l:"Flexibility",p:20,c:"#6b3fa0"},{l:"Rest/Active",p:15,c:"#7a6a5a"}]
+  },
+  2:{
+    meta:["4 strength sessions / week","2 cardio sessions","1 yoga/mobility day","Focus: increase load + add intervals"],
+    days:[
+      {name:"Monday",   type:"strength",label:"Strength",   exs:["Barbell squat 4×8","DB bench press 4×8","Cable row 3×10","Face pulls 3×15","Pallof press 3×10"]},
+      {name:"Tuesday",  type:"cardio",  label:"Cardio",     exs:["5 min warm-up","35 min elliptical Zone 2-3","2 min intervals x4","5 min cool-down"]},
+      {name:"Wednesday",type:"strength",label:"Strength",   exs:["Hip hinge deadlift 4×8","Overhead DB press 3×10","Lat pulldown 4×10","Farmer carry 3×30s","Side plank 3×30s"]},
+      {name:"Thursday", type:"flex",    label:"Flexibility",exs:["Yoga flow 30 min","Focus: hips + thoracic spine","Pigeon pose 3×45s","Thread-the-needle 3×30s"]},
+      {name:"Friday",   type:"strength",label:"Strength",   exs:["Leg press 4×10","Incline chest fly 3×12","Seated cable row 3×12","Hammer curls 3×12","Ab wheel 3×8"]},
+      {name:"Saturday", type:"cardio",  label:"Cardio",     exs:["45 min brisk walk or hike","Include hills for intensity","Target HR 99-120 bpm","Stay hydrated"]},
+      {name:"Sunday",   type:"rest",    label:"Rest",       exs:["Full rest day","10 min stretch optional","Focus on sleep quality","Prepare for next week"]}
+    ],
+    split:[{l:"Strength",p:45,c:"#2d6a4f"},{l:"Cardio",p:28,c:"#1a5c7a"},{l:"Flexibility",p:14,c:"#6b3fa0"},{l:"Rest/Active",p:13,c:"#7a6a5a"}]
+  },
+  3:{
+    meta:["4-5 strength sessions / week","2 longer cardio sessions","Daily 10 min mobility","Focus: peak intensity + body composition"],
+    days:[
+      {name:"Monday",   type:"strength",label:"Strength",   exs:["Squat 4×6 heavier","Push-up variation 4×12","Bent-over row 4×8","Arnold press 3×10","Loaded carry 3×40s"]},
+      {name:"Tuesday",  type:"cardio",  label:"Cardio",     exs:["5 min warm-up","20 min Zone 2 base","6x1 min moderate push","10 min cool-down walk"]},
+      {name:"Wednesday",type:"strength",label:"Strength",   exs:["Trap bar deadlift 4×6","Cable chest press 3×12","Seated row 4×10","Tricep dip assisted 3×10","Core circuit 3 rounds"]},
+      {name:"Thursday", type:"flex",    label:"Flexibility",exs:["Yoga or Pilates 40 min","Full body mobility flow","Shoulder CARs 2×5","Hip 90/90 stretch 3×45s"]},
+      {name:"Friday",   type:"strength",label:"Strength",   exs:["Bulgarian split squat 3×10","DB pullover 3×12","Chest-supported row 4×10","Cable curl 3×15","Plank variations 4×30s"]},
+      {name:"Saturday", type:"cardio",  label:"Cardio",     exs:["50 min cycling or swim","Negative split pace","Finish stronger than start","Zone 2-3 throughout"]},
+      {name:"Sunday",   type:"rest",    label:"Rest",       exs:["Full rest","Epsom salt bath optional","Light walk if desired","Reflect on 12-week progress"]}
+    ],
+    split:[{l:"Strength",p:48,c:"#2d6a4f"},{l:"Cardio",p:30,c:"#1a5c7a"},{l:"Flexibility",p:14,c:"#6b3fa0"},{l:"Rest/Active",p:8,c:"#7a6a5a"}]
+  }
+};
+
+var TC = {strength:"#2d6a4f",cardio:"#1a5c7a",flex:"#6b3fa0",rest:"#7a6a5a",active:"#a05c1a"};
+var BC = {strength:"db-strength",cardio:"db-cardio",flex:"db-flex",rest:"db-rest",active:"db-active"};
+var BADGE_STYLE = {
+  strength:{bg:"#e8f5ee",col:"#2d6a4f"},
+  cardio:  {bg:"#e4f2f8",col:"#1a5c7a"},
+  flex:    {bg:"#f0eaf8",col:"#6b3fa0"},
+  rest:    {bg:"#f0ece6",col:"#7a6a5a"},
+  active:  {bg:"#f8f0e4",col:"#a05c1a"}
+};
+
+// ── EXERCISE DB ───────────────────────────────────────────────────────────────
+var EX = {
+  "Goblet squat":{type:"strength",muscles:{p:["Quads","Glutes"],s:["Core","Hamstrings"]},steps:["Hold a dumbbell vertically at chest height with both hands cupping the top.","Stand feet shoulder-width, toes angled 15-30 degrees out.","Brace core, push hips back, bend knees to lower into a squat.","Keep chest tall and elbows inside your knees at the bottom.","Drive through heels to stand, squeeze glutes at the top."],dos:["Keep chest upright","Drive knees out over toes","Full depth if mobility allows"],donts:["Let heels rise","Cave knees inward","Round the lower back"]},
+  "Dumbbell chest press":{type:"strength",muscles:{p:["Chest","Front deltoids"],s:["Triceps"]},steps:["Lie flat on bench, dumbbells at chest, palms facing forward.","Plant feet firmly, slight natural arch in lower back.","Press both dumbbells up and slightly inward, arms nearly straight.","Pause at top — don't fully lock elbows.","Lower slowly (2-3 seconds) back to chest level."],dos:["Shoulder blades pinched together","Control the descent","Breathe out on the push"],donts:["Flare elbows wide","Bounce weights off chest","Lift hips off bench"]},
+  "Seated cable row":{type:"strength",muscles:{p:["Lats","Mid-back"],s:["Biceps","Rear deltoids"]},steps:["Sit at cable row machine, feet on platform, knees slightly bent.","Grip handle, arms extended, back straight and tall.","Pull handle toward lower abdomen, leading with elbows.","Squeeze shoulder blades together — hold 1 second.","Slowly extend arms back, keeping tension in the back."],dos:["Sit tall with chest proud","Drive elbows back not out","Full extension on return"],donts:["Rock forward for momentum","Shrug shoulders up","Pull to chest instead of belly"]},
+  "Dumbbell curl":{type:"strength",muscles:{p:["Biceps"],s:["Forearms"]},steps:["Stand holding dumbbells at sides, palms facing forward.","Keep elbows pinned to your sides throughout.","Curl both weights up toward shoulders in a smooth arc.","Squeeze biceps hard at top for 1 second.","Lower slowly (2-3 seconds) back to start."],dos:["Keep upper arms completely still","Full range of motion","Controlled lowering"],donts:["Swing elbows forward","Use body momentum","Rush the descent"]},
+  "Plank":{type:"strength",muscles:{p:["Core"],s:["Shoulders","Glutes"]},steps:["Start face-down on forearms and toes, elbows under shoulders.","Lift hips so body forms a straight line head to heels.","Squeeze glutes and brace abs firmly.","Keep neck neutral, gaze at floor just ahead.","Hold for the prescribed time, breathing steadily."],dos:["Keep hips level","Breathe — don't hold breath","Engage glutes actively"],donts:["Let hips sag","Hike hips up too high","Hold your breath"]},
+  "Romanian deadlift":{type:"strength",muscles:{p:["Hamstrings","Glutes"],s:["Lower back","Core"]},steps:["Stand holding dumbbells in front of thighs, feet hip-width.","Hinge at hips — push them back as you lower weights along legs.","Keep slight knee bend and flat back throughout.","Lower until you feel a strong hamstring stretch (mid-shin level).","Drive hips forward to stand, squeeze glutes at top."],dos:["Keep weights close to legs","Maintain neutral spine","Feel the stretch, not pain"],donts:["Round lower back","Lock knees completely","Lower beyond flexibility limit"]},
+  "Incline DB press":{type:"strength",muscles:{p:["Upper chest"],s:["Front deltoids","Triceps"]},steps:["Set bench to 30-45 degrees. Sit with dumbbells on thighs.","Kick weights up as you lie back, hold at upper-chest level.","Press upward and slightly inward, arms nearly extended.","Pause at top, then lower slowly over 2-3 seconds.","Stop when dumbbells are just outside upper chest at bottom."],dos:["Keep shoulder blades retracted","Moderate incline angle","Control the lowering phase"],donts:["Use a 90 degree incline","Bounce at the bottom","Let shoulders roll forward"]},
+  "Lat pulldown":{type:"strength",muscles:{p:["Lats"],s:["Biceps","Rear deltoids"]},steps:["Sit at machine, thighs under pad, feet flat.","Grip bar slightly wider than shoulder-width, palms away.","Lean back slightly (15 degrees) and pull bar to upper chest.","Lead with elbows, squeeze lats as bar reaches collarbone.","Slowly let bar rise back up, fully extending arms before next rep."],dos:["Pull to upper chest","Lean back only slightly","Full extension at top"],donts:["Pull behind your head","Use excessive body swing","Shrug shoulders"]},
+  "Tricep pushdown":{type:"strength",muscles:{p:["Triceps"],s:[]},steps:["Attach rope or bar to high cable pulley, stand facing machine.","Grip with both hands, elbows tucked to sides.","Push weight down until arms fully extended.","Squeeze triceps hard at bottom for 1 second.","Slowly return to start — upper arms stay pinned throughout."],dos:["Keep elbows still at sides","Full extension at bottom","Control the return"],donts:["Let elbows flare out","Use shoulder momentum","Rush the reps"]},
+  "Dead bug":{type:"strength",muscles:{p:["Core"],s:["Hip flexors"]},steps:["Lie on back, arms pointing up, knees bent at 90 degrees in air.","Press lower back firmly into floor — maintain throughout.","Lower right arm overhead AND left leg toward floor simultaneously.","Stop just before touching floor, hold 1-2 seconds.","Return to start and repeat opposite side. That is one rep."],dos:["Keep lower back pressed flat","Move slowly and with control","Breathe out as you extend"],donts:["Let back arch off floor","Rush the movement","Extend beyond your control"]},
+  "Barbell squat":{type:"strength",muscles:{p:["Quads","Glutes"],s:["Hamstrings","Core","Erectors"]},steps:["Position bar on upper traps. Step back from rack.","Set feet shoulder-width, toes out 15-30 degrees. Brace core.","Break at hips and knees simultaneously, sit back and down.","Lower until thighs are parallel or as low as mobility allows.","Drive through whole foot to stand, keeping chest up."],dos:["Brace core before every rep","Drive knees out over toes","Keep bar over mid-foot"],donts:["Let chest collapse forward","Allow knees to cave","Relax at the bottom"]},
+  "DB bench press":{type:"strength",muscles:{p:["Chest"],s:["Front deltoids","Triceps"]},steps:["Sit on bench with dumbbells on thighs, lie back bringing them to chest.","Retract shoulder blades into bench — maintain throughout.","Press both dumbbells up and slightly inward, exhaling on push.","Pause at top without fully locking elbows.","Lower slowly (3 seconds) to chest level. Repeat."],dos:["Keep feet flat and stable","Pinch shoulder blades back","Controlled descent every rep"],donts:["Flare elbows at 90 degrees","Touch weights at top","Arch excessively"]},
+  "Cable row":{type:"strength",muscles:{p:["Mid-back","Lats"],s:["Biceps","Rear deltoids"]},steps:["Set cable to mid-height, grip handle, neutral tall spine.","Start with arms extended.","Pull handle to lower ribs, drive elbows back, squeeze shoulder blade.","Hold contracted position 1 second.","Return slowly to full extension without rounding back."],dos:["Lead with elbows","Keep torso still","Full stretch at extension"],donts:["Jerk the weight","Let shoulder roll forward","Pull too high toward shoulders"]},
+  "Face pulls":{type:"strength",muscles:{p:["Rear deltoids","Rotator cuff"],s:["Mid-traps","Rhomboids"]},steps:["Attach rope to high cable pulley. Grip both ends thumbs up.","Step back so there is tension, arms extended.","Pull rope toward face, spreading hands apart as you pull.","Finish with hands beside ears, elbows high and flared.","Hold 1 second at peak, then slowly return."],dos:["Keep elbows high","Use light weight","Spread the rope at the end"],donts:["Use heavy load","Pull toward neck or chest","Let elbows drop below cable"]},
+  "Pallof press":{type:"strength",muscles:{p:["Core (anti-rotation)"],s:["Obliques","Shoulders"]},steps:["Set cable to chest height. Stand sideways to machine, grip handle.","Step away until there is tension, feet shoulder-width.","Hold handle at chest, then press straight out in front.","Hold extended position 2 seconds — resist cable pulling you sideways.","Return hands to chest. Complete all reps, then switch sides."],dos:["Keep hips square","Breathe steadily","Stand tall with proud chest"],donts:["Twist toward the cable","Use too much weight","Rush the press"]},
+  "Hip hinge deadlift":{type:"strength",muscles:{p:["Hamstrings","Glutes","Lower back"],s:["Traps","Core"]},steps:["Stand feet hip-width, bar or dumbbells over mid-foot.","Hinge at hips, pushing them back as you reach for the bar — keep back flat.","Grip the bar just outside legs. Take big breath, brace core.","Drive feet into floor and stand tall, hips and shoulders rising together.","Lock out at top — glutes squeezed, hips forward. Lower with control."],dos:["Keep bar close to body","Neutral spine start to finish","Push the floor away"],donts:["Round lower back","Jerk bar off floor","Hyperextend at lockout"]},
+  "Overhead DB press":{type:"strength",muscles:{p:["Shoulders"],s:["Triceps","Upper traps"]},steps:["Sit on bench with back support, or stand feet shoulder-width.","Hold dumbbells at shoulder height, palms facing forward.","Press weights straight up, bringing slightly together at top.","Stop just short of full lockout to keep tension.","Lower slowly back to shoulder height. Keep core braced."],dos:["Keep ribs down","Maintain neutral spine","Controlled descent"],donts:["Press behind head","Use legs to help","Let elbows flare forward"]},
+  "Farmer carry":{type:"strength",muscles:{p:["Grip","Traps"],s:["Core","Shoulders","Legs"]},steps:["Pick up heavy dumbbell or kettlebell in each hand.","Stand tall: shoulders back and down, core braced.","Walk forward with controlled, deliberate steps.","Maintain tall posture — don't let weight pull you sideways.","Set weights down with control at end of set."],dos:["Stay tall — no leaning","Take even steps","Squeeze handles hard"],donts:["Let shoulders round forward","Walk on tiptoe","Rush the walk"]},
+  "Side plank":{type:"strength",muscles:{p:["Obliques","Lateral core"],s:["Glutes","Shoulders"]},steps:["Lie on side, propped on one forearm, elbow under shoulder.","Stack feet or stagger for balance. Lift hips off floor.","Form straight line from head to feet — no sagging.","Engage obliques and glutes to hold position.","Hold for prescribed time, then switch sides."],dos:["Keep hips lifted and level","Look straight ahead","Breathe steadily"],donts:["Let hips sag","Roll body forward","Hold your breath"]},
+  "Leg press":{type:"strength",muscles:{p:["Quads","Glutes"],s:["Hamstrings","Calves"]},steps:["Sit in leg press machine, back flat against pad, feet shoulder-width on platform.","Release safety handles.","Lower platform by bending knees to about 90 degrees.","Press platform back up by driving through heels and mid-foot.","Stop just short of locking knees at top. Repeat."],dos:["Keep lower back against pad","Drive through heels","Full range without locking out"],donts:["Let knees cave inward","Go past 90 degrees if knee issues","Lift hips off seat"]},
+  "Incline chest fly":{type:"strength",muscles:{p:["Upper chest"],s:["Front deltoids"]},steps:["Set bench to 30-45 degrees. Lie back with dumbbells pressed over chest.","Turn palms to face each other. Maintain soft fixed bend in elbows.","Open arms wide in arc, lowering until deep chest stretch.","Stop when upper arms are parallel to floor.","Squeeze chest to bring weights back together in same arc."],dos:["Keep elbow bend fixed","Think hugging a tree","Control lowering phase"],donts:["Straighten elbows during rep","Lower past parallel","Use heavy weight"]},
+  "Hammer curls":{type:"strength",muscles:{p:["Biceps","Brachialis"],s:["Forearms"]},steps:["Stand holding dumbbells at sides, palms facing inward (neutral grip).","Keep upper arms still and elbows tucked.","Curl both weights up toward shoulders, keeping neutral grip.","Squeeze at top, then slowly lower back to start.","Repeat without swinging."],dos:["Keep neutral grip throughout","Squeeze at top","Slow controlled descent"],donts:["Rotate palms","Swing elbows forward","Rush the reps"]},
+  "Ab wheel":{type:"strength",muscles:{p:["Core"],s:["Lats","Shoulders"]},steps:["Kneel on mat, hold ab wheel with both hands under shoulders.","Brace core hard and tuck hips slightly under.","Slowly roll wheel forward as far as you can without hips sagging.","Pause at full extension for 1 second.","Contract abs to pull wheel back to start."],dos:["Keep hips tucked","Go only as far as you can control","Brace core before each rep"],donts:["Let hips sag and lower back arch","Use arms to pull back","Rush the extension"]},
+  "Squat":{type:"strength",muscles:{p:["Quads","Glutes"],s:["Hamstrings","Core","Erectors"]},steps:["Position bar on upper traps. Step back, feet shoulder-width, toes out.","Take big breath and brace core tightly — hold throughout rep.","Break at hips and knees together, sitting back and down.","Reach parallel depth or below while keeping chest up.","Drive hard through whole foot to stand."],dos:["Brace and breathe before each rep","Drive knees out","Keep bar path vertical"],donts:["Chest falling forward","Cave knees","Relax at the bottom"]},
+  "Push-up variation":{type:"strength",muscles:{p:["Chest","Triceps"],s:["Front deltoids","Core"]},steps:["Choose: standard, close-grip, wide-grip, or feet elevated.","Start in high plank, hands slightly wider than shoulders.","Lower chest toward floor, elbows at 45 degrees from torso.","Stop 1 inch above floor — don't rest.","Push back up explosively, maintaining rigid plank."],dos:["Core and glutes engaged","Elbows at 45 degrees — not flared","Full range of motion"],donts:["Sag hips or pike up","Rush through partial reps","Let head drop forward"]},
+  "Bent-over row":{type:"strength",muscles:{p:["Lats","Mid-back"],s:["Biceps","Rear deltoids","Core"]},steps:["Hold barbell or dumbbells, feet hip-width. Hinge to 45 degrees with flat back.","Let weight hang straight down, arms extended.","Pull weight to lower ribcage, driving elbows back and up.","Squeeze shoulder blades together — hold 1 second.","Lower with control back to hanging position."],dos:["Keep back flat","Pull to ribs not chest","Stay hinged whole set"],donts:["Stand up during row","Use momentum to jerk weight","Let lower back round"]},
+  "Arnold press":{type:"strength",muscles:{p:["All three deltoid heads"],s:["Triceps","Upper traps"]},steps:["Sit tall holding dumbbells at shoulder height, palms facing you.","As you press up, rotate palms outward — finish palms facing forward.","Press all the way up until arms nearly extended.","Reverse rotation as you lower: palms rotate back toward you.","Keep core braced and avoid arching back."],dos:["Smooth controlled rotation","Keep ribs down","Full overhead extension"],donts:["Arch lower back","Rush the rotation","Use momentum"]},
+  "Loaded carry":{type:"strength",muscles:{p:["Traps","Core","Grip"],s:["Glutes","Shoulders"]},steps:["Pick up heavy dumbbells — challenging but controllable.","Stand tall: chest up, shoulders back and down, core braced hard.","Walk in straight line with deliberate even steps.","Keep weight from pulling posture to either side.","Set down with control at end of set."],dos:["Tall posture throughout","Even controlled steps","Breathe steadily"],donts:["Lean to compensate","Let shoulders round","Walk too fast"]},
+  "Trap bar deadlift":{type:"strength",muscles:{p:["Glutes","Quads","Hamstrings"],s:["Traps","Core"]},steps:["Stand inside trap bar, feet hip-width, bar over mid-foot.","Hinge and grip handles, flat back, hips above knees, shoulders over bar.","Brace hard, big breath, then drive feet through floor.","Stand tall — hips and shoulders rise at same rate.","Squeeze glutes at lockout. Hinge to lower back down."],dos:["Neutral spine throughout","Push the floor away","Lock out fully at top"],donts:["Round lower back","Jerk off the floor","Hyperextend at lockout"]},
+  "Cable chest press":{type:"strength",muscles:{p:["Chest"],s:["Front deltoids","Triceps"]},steps:["Set both pulleys to chest height. Stand in center facing away, grip both handles.","Step forward into staggered stance for stability.","Press both handles forward and slightly inward.","Pause when hands are close together in front of chest.","Slowly resist cables back to start, feeling the chest stretch."],dos:["Keep shoulder blades retracted","Slight forward lean","Control the return"],donts:["Let shoulders roll forward","Straighten elbows completely","Lose tension at extension"]},
+  "Tricep dip assisted":{type:"strength",muscles:{p:["Triceps"],s:["Chest","Front deltoids"]},steps:["Use assisted dip machine or parallel bars with band.","Grip handles, arms extended, shoulders down.","Lower body by bending elbows to 90 degrees, leaning slightly forward.","Press back up to start by extending elbows fully.","Controlled movement — no swinging."],dos:["Keep shoulders down and back","Lean slightly forward","Full extension at top"],donts:["Dip too deep if shoulder sensitive","Shrug shoulders up","Swing to get up"]},
+  "Core circuit":{type:"strength",muscles:{p:["Full core"],s:["Hip flexors","Glutes"]},steps:["4 exercises back-to-back: plank 30s, dead bug 8 reps, side plank 20s each side, hollow hold 20s.","Plank: forearms down, straight line head to heels, core braced.","Dead bug: lying on back, lower opposite arm and leg while back stays flat.","Side plank: forearm down, hips lifted, straight line.","Hollow hold: on back, arms overhead, lower back flat, legs and arms raised slightly."],dos:["Quality over speed","Rest 60-90s between rounds","Brace core before each exercise"],donts:["Let back arch on dead bugs or hollow hold","Rush transitions","Skip rest between rounds"]},
+  "Bulgarian split squat":{type:"strength",muscles:{p:["Quads","Glutes"],s:["Hamstrings","Core"]},steps:["Stand about 2 feet in front of bench. Place rear foot on bench laces down.","Hold dumbbells at sides or barbell on back.","Lower rear knee toward floor, keeping front shin mostly vertical.","Stop when rear knee is just above floor.","Drive through front heel to return to start."],dos:["Keep torso upright","Front knee tracks over toes","Control the descent"],donts:["Lean too far forward","Let front knee cave in","Stand too close to bench"]},
+  "DB pullover":{type:"strength",muscles:{p:["Lats","Chest"],s:["Triceps","Serratus"]},steps:["Lie perpendicular across bench, upper back on bench, hips low.","Hold one dumbbell with both hands above chest, arms nearly straight.","Lower weight back over head in a wide arc, feeling lat and chest stretch.","Stop when upper arms are parallel to floor.","Pull weight back over chest through same arc."],dos:["Keep fixed soft elbow bend","Move in controlled arc","Feel the stretch — don't force it"],donts:["Let elbows flare excessively","Use too much weight","Rush past the stretch"]},
+  "Chest-supported row":{type:"strength",muscles:{p:["Mid-back","Lats"],s:["Biceps","Rear deltoids"]},steps:["Set incline bench to 30-45 degrees. Lie chest-down holding dumbbells.","Let arms hang straight down, palms facing each other.","Row both dumbbells up by driving elbows back, squeeze shoulder blades.","Hold top position 1 second.","Lower slowly back to hanging start."],dos:["Keep chest against bench","Squeeze shoulder blades at top","Full hang at bottom"],donts:["Lift chest off pad to cheat","Shrug shoulders up","Use momentum"]},
+  "Cable curl":{type:"strength",muscles:{p:["Biceps"],s:["Brachialis","Forearms"]},steps:["Attach bar or rope to low cable pulley. Stand facing machine.","Grip palms up, arms extended, slight cable tension.","Keep upper arms pinned to sides and curl bar toward shoulders.","Squeeze biceps hard at top.","Lower slowly (2-3 seconds) back to start under cable tension."],dos:["Keep upper arms still","Full range of motion","Controlled descent"],donts:["Swing elbows forward","Rush the downward phase","Use back to help"]},
+  "Plank variations":{type:"strength",muscles:{p:["Full core"],s:["Shoulders","Glutes"]},steps:["Choose one variation per set: standard forearm plank, high plank, plank with hip dip, or plank reach.","Standard: elbows under shoulders, body straight line, core braced.","High plank: hands under shoulders, same alignment as push-up top.","Hip dip: from side plank, lower hip to near floor and back up.","Plank reach: from high plank, extend one arm forward keeping hips level."],dos:["Keep breathing steady","Maintain rigid straight body line","Progress variation difficulty over weeks"],donts:["Sag hips","Hold your breath","Sacrifice form for time"]},
+  "Yoga flow":{type:"flex",muscles:{p:["Full body mobility"],s:[]},steps:["Begin in child pose 1 minute — arms extended, hips to heels, forehead down.","Move through sun salutations: mountain, forward fold, plank, cobra, downward dog. Repeat 5x.","Hold warrior I and warrior II for 5 breaths each side.","Add pigeon pose: front leg bent, back leg extended. Hold 45 seconds each side.","End with supine twist: draw one knee across body. 30 seconds each side."],dos:["Move at your own pace","Focus on breath in every pose","Modify any pose that causes joint pain"],donts:["Force flexibility beyond current range","Skip cool-down savasana","Hold breath in difficult poses"]},
+  "Hip flexor stretch":{type:"flex",muscles:{p:["Hip flexors"],s:["Quads"]},steps:["Kneel on right knee, left foot forward in lunge position.","Tuck pelvis slightly under — this is the key to the stretch.","Shift weight gently forward until you feel stretch at front of right hip.","Keep torso tall and upright.","Hold 30 seconds, breathing deeply. Switch sides."],dos:["Tuck the pelvis","Breathe and relax into it","Upright torso"],donts:["Lean torso forward","Force deeper stretch","Hold your breath"]},
+  "Hamstring stretch":{type:"flex",muscles:{p:["Hamstrings"],s:["Calves","Lower back"]},steps:["Lie on back. Bend one knee, foot flat on floor.","Lift other leg, holding behind thigh or calf.","Gently straighten lifted leg toward ceiling until you feel hamstring stretch.","Hold at comfortable tension — 6-7 out of 10, never painful.","Hold 30 seconds, then switch legs."],dos:["Keep lower back flat on floor","Breathe slowly into stretch","Comfortable tension only"],donts:["Force leg straight if painful","Hold your breath","Bounce or pulse"]},
+  "Chest opener":{type:"flex",muscles:{p:["Chest","Front shoulders"],s:["Biceps tendons"]},steps:["Stand in doorway or clasp hands behind back.","Doorway: place forearms on frame at 90 degrees and lean gently forward.","Behind back: interlace fingers, straighten arms, lift gently away from body.","Feel stretch across chest and front shoulders.","Breathe deeply — chest expands more with each inhale."],dos:["Start gentle","Breathe deeply to enhance stretch","Keep chin neutral"],donts:["Shrug shoulders up","Force past pain","Arch lower back excessively"]},
+  "Cat-cow":{type:"flex",muscles:{p:["Thoracic spine","Lumbar spine"],s:["Core","Hip flexors"]},steps:["Start on all fours, hands under shoulders, knees under hips.","Cat: exhale and round spine toward ceiling, dropping head and tailbone.","Cow: inhale and let belly drop toward floor, lifting head and tailbone.","Move slowly and deliberately between the two positions.","Rhythm of breath drives movement — inhale for cow, exhale for cat."],dos:["Let breath guide movement","Move whole spine neck to tailbone","Go slowly"],donts:["Rush the movement","Only move lower back","Ignore the neck"]},
+  "Foam roll":{type:"flex",muscles:{p:["Multiple muscle groups"],s:[]},steps:["Spend about 2 minutes per area: calves, hamstrings, glutes, upper back, and lats.","Roll slowly until you find a tight or tender spot.","Pause on tender spots for 20-30 seconds, breathing through discomfort.","After the pause, slowly roll off spot and continue.","Upper back: support head with hands, roll from mid to upper back. Avoid rolling lower back directly."],dos:["Roll slowly","Pause on tight spots","Stay off the lower spine directly"],donts:["Roll directly on joints","Hold breath on tender spots","Go so hard it is excruciating"]},
+  "Pigeon pose":{type:"flex",muscles:{p:["Hip external rotators","Glutes","Hip flexors"],s:["IT band"]},steps:["From all fours or downward dog, bring right knee forward toward right wrist.","Angle right shin in front of you. Extend left leg straight back.","Lower hips toward floor — use blanket or block under hip if needed.","Walk hands forward and lower torso over front shin.","Hold 45 seconds, breathing deeply. Switch sides."],dos:["Use a prop under hip if needed","Breathe through the intensity","Keep hips square"],donts:["Force shin parallel if hip is too tight","Push through sharp knee pain","Hold your breath"]},
+  "Thread-the-needle":{type:"flex",muscles:{p:["Thoracic spine rotation","Rear shoulder"],s:["Mid-back"]},steps:["Start on all fours, hands under shoulders, knees under hips.","Slide right arm underneath body toward left, palm up.","Let right shoulder and cheek rest on floor.","Hold 30 seconds feeling thoracic rotation.","Return to all fours and repeat other side."],dos:["Let gravity do the work","Keep top arm pressing into floor","Breathe deeply"],donts:["Force the shoulder down","Do this with shoulder injury without modification","Rush — it is a passive stretch"]},
+  "Yoga or Pilates":{type:"flex",muscles:{p:["Full body"],s:[]},steps:["Yoga: follow 40-minute intermediate flow. Focus on hip openers, spinal twists, shoulder work.","Pilates: focus on core activation, hip mobility, controlled spinal flexion and extension.","Key moves: bridge, swan, child pose, seated forward fold, thread-the-needle, figure-4 stretch.","Move with deliberate control throughout.","End with 5 minutes of breathing and relaxation."],dos:["Choose a format you enjoy","Focus on breath throughout","Modify anything uncomfortable"],donts:["Push into sharp pain","Skip if it feels easy — advance the variation","Rush the cool-down"]},
+  "Shoulder CARs":{type:"flex",muscles:{p:["Shoulder rotator cuff","Joint capsule"],s:["Scapular stabilizers"]},steps:["Stand tall. Lift one arm forward, keeping rest of body completely still.","Rotate arm in largest circle possible: up overhead, out to side, down behind you.","Move as far as you can in each direction.","Go slowly — full circle should take about 5 seconds.","Complete 5 circles each direction, then switch arms."],dos:["Keep rest of body absolutely still","Move as slowly as possible","Push into full range"],donts:["Use momentum or speed","Let torso rotate to compensate","Skip — crucial for shoulder health at 55+"]},
+  "Hip 90/90 stretch":{type:"flex",muscles:{p:["Hip external and internal rotators"],s:["Glutes","Hip capsule"]},steps:["Sit on floor with both legs in 90/90: front leg bent 90 degrees in front, back leg bent 90 degrees to side.","Both shins on floor. Keep torso tall.","Lean forward over front shin to deepen external rotation stretch.","Hold 45 seconds, then switch sides.","After 2 rounds try internal rotation side: lean toward back shin."],dos:["Keep both sit bones toward floor","Lean forward not sideways","Breathe into hips"],donts:["Force position if hips don't reach floor","Round spine to lean forward","Skip the internal rotation side"]},
+  "10 min warm-up walk":{type:"cardio",muscles:{p:["Legs","Heart"],s:["Core"]},steps:["Begin walking at comfortable easy pace — slower than normal walking speed.","Focus on posture: tall spine, arms swinging naturally, eyes forward.","Gradually increase pace every 2-3 minutes.","By minute 8-10 you should feel warm but not breathing hard.","This primes cardiovascular system and lubricates joints before main session."],dos:["Go slower than you think you need to","Swing arms naturally","Land softly heel to toe"],donts:["Skip the warm-up","Walk too fast too soon","Stare at phone while walking"]},
+  "Zone 2 walk or bike":{type:"cardio",muscles:{p:["Heart","Legs"],s:["Core"]},steps:["Target heart rate: 99-116 bpm (60-70 percent of max HR of 165).","Use talk test: you can speak in complete sentences but could not sing.","On treadmill or outside: brisk walk with purpose. On bike: moderate resistance, steady cadence.","Maintain this intensity consistently for full duration.","If HR climbs too high, slow down slightly."],dos:["Stay in zone — don't push harder","Use heart rate monitor if possible","Steady consistent effort"],donts:["Go so hard you can't talk","Go so easy you feel nothing","Check phone constantly"]},
+  "5 min cool-down":{type:"cardio",muscles:{p:["Heart"],s:[]},steps:["After main cardio block, reduce pace or resistance significantly.","Walk at very easy pace or pedal with almost no resistance.","Allow heart rate to drop below 100 bpm before stopping.","Focus on slowing breathing — inhale through nose, exhale through mouth.","Prevents blood pooling in legs and reduces post-exercise dizziness."],dos:["Take the full 5 minutes","Let HR come down naturally","Keep moving — don't just stop"],donts:["Abruptly stop from high intensity","Sit down immediately after cardio","Rush this phase"]},
+  "30 min swim or cycling":{type:"cardio",muscles:{p:["Heart","Full body or Legs"],s:[]},steps:["Swimming: warm up with 2 easy laps. Alternate freestyle and backstroke at comfortable pace.","Cycling: set resistance so you can pedal at 70-90 rpm without straining.","Both: maintain Zone 2 intensity — conversational pace, slight sweat.","Every 10 minutes check in with your effort level.","Cool down: 5 minutes at very easy pace before stopping."],dos:["Consistent steady effort","Stay hydrated","Enjoy it — these are low-impact options"],donts:["Race or push too hard","Skip the warm-up laps swimming","Forget to hydrate"]},
+  "35 min elliptical":{type:"cardio",muscles:{p:["Heart","Legs","Arms"],s:[]},steps:["Set resistance and incline for moderate effort from the start.","Aim for 60-75 percent max HR for first 25 minutes (Zone 2).","Use arms actively on handles for full-body engagement.","For last 10 minutes push to Zone 3 — slightly uncomfortable but sustainable.","Cool down 5 minutes easy at low resistance."],dos:["Use the handles for engagement","Keep cadence steady","Monitor HR throughout"],donts:["Lean heavily on handles (reduces leg work)","Go too hard too early","Skip the Zone 3 finish"]},
+  "2 min intervals":{type:"cardio",muscles:{p:["Heart"],s:[]},steps:["After Zone 2 base, increase resistance or pace to challenging but sustainable effort.","Aim for 80-85 percent max HR — breathing harder but can say a few words.","Hold for 2 full minutes, then recover for 2 minutes at easy pace.","Repeat for 4 total intervals.","Each interval should feel roughly the same — don't go all-out on the first."],dos:["Pace yourself — 4 intervals not 1 sprint","Recover fully between intervals","Consistent effort across all 4"],donts:["Go to maximum effort","Skip recovery intervals","Add more than 4 in Phase 2"]},
+  "45 min brisk walk or hike":{type:"cardio",muscles:{p:["Legs","Heart"],s:["Core","Glutes"]},steps:["Choose outdoor route with some hills if possible.","Warm up 5 minutes easy, then increase to brisk purposeful stride.","Hills: lean slightly forward, shorter steps, drive with arms.","Target HR 100-120 bpm — can hold conversation.","Cool down with 5 minutes easy walking."],dos:["Choose route with some elevation","Use trekking poles on uneven terrain if needed","Hydrate before and during"],donts:["Wear worn-out footwear","Push through joint pain","Go too far from home for a first hike"]},
+  "Zone 2 base":{type:"cardio",muscles:{p:["Heart","Legs"],s:[]},steps:["Begin at easy sustainable pace — 60-70 percent max HR.","This is your aerobic foundation for the session.","Maintain steady cadence and light resistance.","Focus on nasal breathing if possible — signals you are in Zone 2.","Prepares body for the intervals that follow."],dos:["Stay disciplined — don't drift into Zone 3","Breathe through nose","Think of it as warming up your engine"],donts:["Push the pace","Get competitive with others","Look at your phone"]},
+  "Moderate push intervals":{type:"cardio",muscles:{p:["Heart"],s:[]},steps:["After Zone 2 base, increase effort to about 80 percent max HR.","Hold for exactly 1 minute — use a watch or timer.","Recover for 90 seconds at easy pace between each interval.","Complete 6 total intervals. Effort should be similar each time.","Finish with 10 minutes easy cool-down walking."],dos:["Even effort across all 6 intervals","Full recovery between each","Controlled breathing during push"],donts:["Sprint — this is moderate not maximal","Skip recovery","Do more than 6 intervals"]},
+  "50 min cycling or swim":{type:"cardio",muscles:{p:["Heart","Legs or Full body"],s:[]},steps:["Warm up 5 minutes at easy effort.","Build to comfortable Zone 2-3 pace — sustained, slightly challenging.","Negative split: first 25 minutes Zone 2, last 25 minutes slightly harder.","Cycling: maintain 75-90 rpm with moderate resistance.","Swimming: alternate strokes to reduce shoulder fatigue, focus on smooth technique."],dos:["Finish feeling like you could do 10 more minutes","Stay hydrated","Focus on technique over speed"],donts:["Go out too hard in first 20 minutes","Stop if you feel mild fatigue","Skip the warm-up"]},
+  "Nature walk":{type:"active",muscles:{p:["Legs","Heart"],s:[]},steps:["Choose pleasant outdoor route — park, trail, or neighborhood.","Walk at comfortable unhurried pace. This should feel easy.","Focus on environment — leave headphones out for at least part of it.","Natural terrain is better than flat pavement for joint stimulus.","Aim for 30-45 minutes total."],dos:["Keep it easy — this is recovery","Hydrate before you go","Enjoy the fresh air"],donts:["Turn it into a power walk","Check phone the whole time","Push for distance records"]},
+  "Full rest day":{type:"rest",muscles:{p:[],s:[]},steps:["Today is about recovery — muscles grow and repair when you rest, not when you train.","Stay off your feet as much as practical.","Light activity like a slow walk or gentle stretching is fine if it feels good.","Focus on sleep quality tonight: cool dark room, off screens 60 minutes before bed.","Prepare nutritious meals — today's eating fuels tomorrow's workout."],dos:["Prioritize sleep","Eat well and hydrate","Light stretching if you enjoy it"],donts:["Guilt yourself into extra training","Skimp on sleep or nutrition","Stay sedentary all day if you feel restless"]},
+  "Gentle stretching":{type:"rest",muscles:{p:["Full body"],s:[]},steps:["Keep this very gentle — no pushing or forcing.","Try: cat-cow 10 reps, seated forward fold 30s, supine spinal twist 30s each side, child pose 60s.","Move slowly and only to comfortable range.","Focus on areas that feel tight from the week.","Optional — only do it if it feels good."],dos:["Keep it comfortable — 5 out of 10 intensity max","Follow how body feels","Breathe slowly"],donts:["Push into real stretches","Do anything that resembles training","Feel obligated — skip if tired"]}
+};
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function renderPhase(n) {
+  var ph = PHASES[n];
+
+  // Meta
+  document.getElementById('phaseMeta').innerHTML = ph.meta.map(function(m, i) {
+    if (i === 0) return '<div class="pm-item"><div class="pm-dot"></div><span>' + m + '</span></div>';
+    return '<div class="pm-item" style="color:var(--ink3)">' + m + '</div>';
+  }).join('');
+
+  // Days
+  document.getElementById('dayGrid').innerHTML = ph.days.map(function(d) {
+    var exHtml = d.exs.map(function(e) {
+      var safe = e.replace(/'/g, '&#39;');
+      return '<li onclick="showEx(\'' + safe + '\')">' +
+             '<div class="ex-pip" style="background:' + TC[d.type] + '"></div>' + e + '</li>';
+    }).join('');
+    return '<div class="day-card' + (d.type === 'rest' ? ' rest' : '') + '">' +
+           '<div class="day-name">' + d.name + '</div>' +
+           '<div class="day-badge ' + BC[d.type] + '">' + d.label + '</div>' +
+           '<div class="day-divider"></div>' +
+           '<ul class="ex-list">' + exHtml + '</ul>' +
+           '</div>';
+  }).join('');
+
+  // Split bars
+  document.getElementById('splitRows').innerHTML = ph.split.map(function(s) {
+    return '<div class="split-row">' +
+           '<div class="split-lbl">' + s.l + '</div>' +
+           '<div class="split-track"><div class="split-fill" style="width:0%;background:' + s.c + '" data-p="' + s.p + '"></div></div>' +
+           '<div class="split-pct">' + s.p + '%</div>' +
+           '</div>';
+  }).join('');
+
+  setTimeout(function() {
+    document.querySelectorAll('.split-fill').forEach(function(el) {
+      el.style.width = el.getAttribute('data-p') + '%';
+    });
+  }, 60);
+}
+
+// ── PHASE BUTTONS ─────────────────────────────────────────────────────────────
+document.getElementById('phaseNav').addEventListener('click', function(e) {
+  var btn = e.target.closest('[data-phase]');
+  if (!btn) return;
+  document.querySelectorAll('.phase-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderPhase(parseInt(btn.getAttribute('data-phase'), 10));
+});
+
+// ── EXERCISE MODAL ────────────────────────────────────────────────────────────
+function showEx(name) {
+  var data = lookupEx(name);
+  if (!data) return;
+  var bs = BADGE_STYLE[data.type];
+  document.getElementById('modalTitle').textContent = name.replace(/\s+\d+[xX×]\d+[s]?$/,'').replace(/\s+\d+[xX×]\d+$/,'');
+  var badge = document.getElementById('modalBadge');
+  badge.textContent = {strength:'Strength',cardio:'Cardio',flex:'Flexibility',rest:'Rest',active:'Active recovery'}[data.type] || data.type;
+  badge.style.background = bs.bg;
+  badge.style.color = bs.col;
+  document.getElementById('modalMuscles').innerHTML =
+    data.muscles.p.map(function(m){return '<span class="muscle-pill primary">'+m+'</span>';}).join('') +
+    data.muscles.s.map(function(m){return '<span class="muscle-pill">'+m+'</span>';}).join('');
+  document.getElementById('modalSteps').innerHTML = data.steps.map(function(s,i){
+    return '<li class="step-item"><div class="step-num">'+(i+1)+'</div><div class="step-text">'+s+'</div></li>';
+  }).join('');
+  document.getElementById('modalDos').innerHTML = data.dos.map(function(d){return '<li>'+d+'</li>';}).join('');
+  document.getElementById('modalDonts').innerHTML = data.donts.map(function(d){return '<li>'+d+'</li>';}).join('');
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function lookupEx(name) {
+  // Direct match
+  if (EX[name]) return EX[name];
+  var lower = name.toLowerCase();
+  // Try to match by key words
+  var keys = Object.keys(EX);
+  for (var i = 0; i < keys.length; i++) {
+    if (lower.indexOf(keys[i].toLowerCase()) === 0) return EX[keys[i]];
+  }
+  for (var j = 0; j < keys.length; j++) {
+    var kwords = keys[j].toLowerCase().split(' ');
+    var match = true;
+    for (var k = 0; k < Math.min(kwords.length, 2); k++) {
+      if (lower.indexOf(kwords[k]) === -1) { match = false; break; }
+    }
+    if (match) return EX[keys[j]];
+  }
+  return null;
+}
+
+document.getElementById('modalClose').addEventListener('click', function() {
+  document.getElementById('modalOverlay').classList.remove('open');
+});
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) this.classList.remove('open');
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') document.getElementById('modalOverlay').classList.remove('open');
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+renderPhase(1);
+</script>
+</body>
+</html>
